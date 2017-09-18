@@ -2,12 +2,12 @@ package mybatis_01.mybatis.com.ztx.first;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.naming.resources.Resource;
 import org.junit.Test;
 
 import mybatis_01.mybatis.com.ztx.po.User;
@@ -39,5 +39,26 @@ public class MybatisFirst {
 		
 		// 释放资源
 		session.close();
+	}
+	
+	
+	@Test
+	public void findUserByNameTest() throws IOException{
+		String resource = "SqlMapConfig.xml";
+		
+		InputStream inputStream = Resources.getResourceAsStream(resource);
+		
+		
+		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream);
+
+		
+		SqlSession sqlSession = factory.openSession();
+		
+		List<User> userList = sqlSession.selectList("test.findUserByName", "小明");
+		
+		System.out.println(userList);
+		
+		sqlSession.close();
+		
 	}
 }

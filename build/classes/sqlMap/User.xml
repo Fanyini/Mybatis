@@ -19,4 +19,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findUserById" parameterType="int" resultType="mybatis_01.mybatis.com.ztx.po.User">
 		select * from user where id = #{id}
 	</select>
+	
+	<!-- 
+		根据用户名称模拟查询用户信息，可能返回多条记录
+		
+		${}: 表示拼接sql串，将接收到参数的内容不加任何修饰的传入sql中
+		使用${}会引起sql注入
+		${value} 接收出入参数的内容，如果传入的类型是简单类型，${}只能使用value(并非 VALUE)
+	 -->
+	<select id="findUserByName" parameterType="java.lang.String" resultType="mybatis_01.mybatis.com.ztx.po.User">
+	    SELECT * FROM user WHERE username LIKE "%${value}%"
+	</select>
+	
+	
 </mapper>
