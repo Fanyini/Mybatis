@@ -84,5 +84,46 @@ public class MybatisFirst {
 		// 关闭会话
 		session.close();
 	}
+	
+	
+	// 删除用户信息
+	@Test
+	public void deleteUserTest() throws Exception{
+		String resource = "SqlMapConfig.xml";
 
+		InputStream inputStream = Resources.getResourceAsStream(resource);
+
+		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream);
+
+		SqlSession session = factory.openSession();
+		
+		session.delete("test.deleteUser", 27);
+		// 提交事务
+		session.commit();
+		// 关闭会话
+		session.close();
+	}
+
+	// 更新用户信息
+	@Test
+	public void updateUserTest() throws IOException{
+		String resource = "SqlMapConfig.xml";
+
+		InputStream inputStream = Resources.getResourceAsStream(resource);
+
+		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(inputStream);
+
+		SqlSession session = factory.openSession();
+
+		User user = new User();
+		user.setId(28);
+		user.setAddress("河南郑州");
+		user.setBirthday(new Date());
+		user.setUsername("王da明");
+		session.insert("test.updateUser", user);
+		// 提交事务
+		session.commit();
+		// 关闭会话
+		session.close();
+	}
 }

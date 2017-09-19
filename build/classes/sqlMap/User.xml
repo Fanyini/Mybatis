@@ -65,4 +65,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   	insert into user (username, birthday, sex, address) value(#{username},#{birthday},#{sex},#{address});
 	</insert>
 	
+	<!-- 
+		删除用户
+		根据id删除用户
+	 -->
+	<delete id="deleteUser" parameterType="java.lang.Integer">
+		delete from user where id=#{id}
+	</delete>
+	
+	<!-- 
+		根据用户的id更新用户
+		需要传入用户的id
+		需要传入用户更新信息
+		parameterType ： 指定user 对象，包括id和更新信息，注意id必须存在，防止全部更新
+		#{id}表示传入user对象中获取id的属性值
+	 -->
+	 <update id="updateUser" parameterType="mybatis_01.mybatis.com.ztx.po.User">
+		update user set username=#{username}, birthday=#{birthday}, sex=#{sex}, address=#{address} where id = #{id}     
+	 </update>
+	 
 </mapper>
