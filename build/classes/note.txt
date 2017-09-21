@@ -1,1 +1,11 @@
 在开发环境下日记级别要设置成DEBUG，生产环境要设置成info或者error
+
+注意：
+	mybatis 将按照下面的顺序来加载属性：
+	· 在properties 元素体内定义的属性首先被读取。
+	· 然后会读取properties 元素中resource 或 url 加载的属性， 他会覆盖已读取的同名属性
+	· 最后读取parameterType 传递的属性， 他会覆盖已经读取的同名属性。
+	
+	建议：
+		不要在properties 元素体内 体检任何属性值，只将属性值定义在properties 文件中。
+		在properties 文件中定义属性名要有一定的特殊性， 如xxx.xxx.xxx

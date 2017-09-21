@@ -16,6 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		
 		resultType 指定sql输出结果的所映射的java对象类型，select 指定resultType 表示将单条记录映射成java对象
 	 -->
+	 
+	     
 	<select id="findUserById" parameterType="int" resultType="mybatis_01.mybatis.com.ztx.po.User">
 		select * from user where id = #{id}
 	</select>
@@ -84,4 +86,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		update user set username=#{username}, birthday=#{birthday}, sex=#{sex}, address=#{address} where id = #{id}     
 	 </update>
 	 
+	 
+	 <!-- 用户信息的综合查询 -->
+	 <!--  -->
+	 <select id="findUserList" parameterType="mybatis_01.mybatis.com.ztx.po.UserQueryVo" resultType="mybatis_01.mybatis.com.ztx.po.UserCustomer">
+		select * from user where username Like "%${userCustomer.username}%" and sex = 	#{userCustomer.sex}
+	 </select>
 </mapper>
