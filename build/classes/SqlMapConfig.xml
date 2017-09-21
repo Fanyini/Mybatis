@@ -20,6 +20,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
 	
 	<!-- 加载映射文件 -->
 	<mappers>
-		<mapper resource="sqlMap/User.xml"/>   
+		<mapper resource="Mapper/User.xml"/> 
+		<mapper resource="sqlMap/UserMapper.xml"/>  
 	</mappers>
 </configuration>
