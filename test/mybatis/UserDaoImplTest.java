@@ -79,6 +79,23 @@ public class UserDaoImplTest {
 
 		System.out.println(user);
 		sqlSession.close();
+	}
+	
+	
+	
+	@Test
+	public void testFindUserByIdResultMap() throws Exception {
+		// 创建会话
+		SqlSession sqlSession = sqlSessionFactory.openSession();
 
+		// 创建UserMapper对象，mybatis 自动生成mapper代理
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+
+		// 调用UserMapper 代理
+
+		List<UserCustomer> user = userMapper.findUserByIdResultMap(1);
+
+		System.out.println(user);
+		sqlSession.close();
 	}
 }

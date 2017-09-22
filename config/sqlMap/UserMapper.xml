@@ -92,4 +92,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 <select id="findUserList" parameterType="mybatis_01.mybatis.com.ztx.po.UserQueryVo" resultType="mybatis_01.mybatis.com.ztx.po.UserCustomer">
 		select * from user where username Like "%${userCustomer.username}%" and sex = 	#{userCustomer.sex}
 	 </select>
+	 
+	 <!-- 定义resultMap -->
+	 <!-- id： 对resultMap的唯一标识 -->
+	 <!-- result 对普通列的唯一标识 -->
+	 <resultMap type="mybatis_01.mybatis.com.ztx.po.UserCustomer" id="userResultMap">
+	     <!-- id表示查询结果集中唯一标识 -->
+	     <!-- column ： 查询出来的列名 -->
+	     <!-- property ： type 指定的pojo类型中的属性名 -->
+	     <!-- 最终resultMap 对column 和property 作一个映射（对应关系） -->
+	     <id column="id_" property="id"/>
+	     <!-- 
+	     	result： 表示对普通列映射定义
+	     	column： 查询出来的列名
+	     	property : type指定的pojo类型中的属性名
+	     	最终resultMap 对 column 和 property 作一个唯一映射关系
+	      -->
+	     <result column="username_" property="username"/>
+	 </resultMap>
+	 
+	 <select id="findUserByIdResultMap" parameterType="int" resultMap="userResultMap">
+		select id as id_ , username as username_ from user where id=#{value}
+	 </select>
+	 
 </mapper>

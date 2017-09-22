@@ -26,4 +26,7 @@ public interface UserMapper {
 	public void deleteUser(int id)throws Exception;
 	
 	public List<UserCustomer> findUserList(UserQueryVo userQueryVo) throws Exception;
+	
+	// 使用resultMap 映射结果集
+	public List<UserCustomer> findUserByIdResultMap(int id) throws Exception;
 }
