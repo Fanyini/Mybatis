@@ -1,6 +1,7 @@
 package mybatis_01.mybatis.com.ztx.po;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 用户pojo
@@ -15,6 +16,7 @@ public class User {
 	private String sex;
 	private Date birthday;
 	private String address;
+	private List<Orders> ordersList;
 
 	public int getId() {
 		return id;
@@ -56,10 +58,18 @@ public class User {
 		this.address = address;
 	}
 
+	public List<Orders> getOrdersList() {
+		return ordersList;
+	}
+
+	public void setOrdersList(List<Orders> ordersList) {
+		this.ordersList = ordersList;
+	}
+
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", username=" + username + ", sex=" + sex + ", birthday=" + birthday + ", address="
-				+ address + "]";
+				+ address + ", ordersList=" + ordersList + "]";
 	}
 
 }

@@ -13,6 +13,7 @@ import org.junit.Test;
 import mybatis_01.mybatis.com.ztx.mapper.OrdersCustomMapper;
 import mybatis_01.mybatis.com.ztx.po.Orders;
 import mybatis_01.mybatis.com.ztx.po.OrdersCustom;
+import mybatis_01.mybatis.com.ztx.po.User;
 
 public class OrderCustomTest {
 	SqlSessionFactory sqlSessionFactory = null;
@@ -66,6 +67,20 @@ public class OrderCustomTest {
 		List<Orders> list = ordersCustomMapper.findOrdersAndOrderDetailResulMap();
 		
 		System.out.println(list.toString());
+		
+		sqlSession.close();
+	}
+	
+	@Test
+	public void testFindUserAndItemsResulMap() throws Exception{
+		// 创建会话（必须有）
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		OrdersCustomMapper ordersCustomMapper = sqlSession.getMapper(OrdersCustomMapper.class);
+		
+		List<User> list = ordersCustomMapper.findUserAndItemsResulMap();
+		
+		System.out.println(list);
 		
 		sqlSession.close();
 	}
