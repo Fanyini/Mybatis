@@ -7,11 +7,11 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.logging.log4j.core.config.Order;
 import org.junit.Before;
 import org.junit.Test;
 
 import mybatis_01.mybatis.com.ztx.mapper.OrdersCustomMapper;
+import mybatis_01.mybatis.com.ztx.po.Orders;
 import mybatis_01.mybatis.com.ztx.po.OrdersCustom;
 
 public class OrderCustomTest {
@@ -49,9 +49,23 @@ public class OrderCustomTest {
 		
 		OrdersCustomMapper ordersCustomMapper = sqlSession.getMapper(OrdersCustomMapper.class);
 		
-		List<Order> list = ordersCustomMapper.findOrdersUserResulMap();
+		List<Orders> list = ordersCustomMapper.findOrdersUserResulMap();
 		
 		System.out.println(list);
+		
+		sqlSession.close();
+	}
+	
+	@Test
+	public void testFindOrdersAndOrderDetailResulMap() throws Exception{
+		// 创建会话（必须有）
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		OrdersCustomMapper ordersCustomMapper = sqlSession.getMapper(OrdersCustomMapper.class);
+		
+		List<Orders> list = ordersCustomMapper.findOrdersAndOrderDetailResulMap();
+		
+		System.out.println(list.toString());
 		
 		sqlSession.close();
 	}
