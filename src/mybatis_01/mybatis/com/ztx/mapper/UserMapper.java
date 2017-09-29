@@ -29,4 +29,7 @@ public interface UserMapper {
 	
 	// 使用resultMap 映射结果集
 	public List<UserCustomer> findUserByIdResultMap(int id) throws Exception;
+
+	//
+	public void updateUser(User user) throws Exception;
 }

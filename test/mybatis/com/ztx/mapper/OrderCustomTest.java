@@ -84,4 +84,19 @@ public class OrderCustomTest {
 		
 		sqlSession.close();
 	}
+	
+	
+	@Test
+	public void testFindOrdersUserLazyLoading() throws Exception{
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		OrdersCustomMapper ordersCustomMapper = sqlSession.getMapper(OrdersCustomMapper.class);
+		List<Orders> list = ordersCustomMapper.findOrdersUserLazyLoading();
+		for(Orders orders : list){
+			// 执行getUser() 去查询用户信息，这里实现的是按需查询
+			User user = orders.getUser();
+			System.out.println(user);
+		}
+		sqlSession.close();
+	}
 }

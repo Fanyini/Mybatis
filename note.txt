@@ -6,3 +6,5 @@ ${} 表示拼接符号， 会引起sql注入，不建议使用
 selectOne 表示查询出一条数据进行映射，如果使用selectOne可以实现的使用selectList 也同样可以实现
 
 selectList 表示查询出一个列表
+
+mybatis 在进行延时加载的时候，如果引入了其他的mapper 文件要将他们放在同一个 源文件下，以防止找不到，导致映射失败
