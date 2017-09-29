@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import mybatis_01.mybatis.com.ztx.mapper.OrdersCustomMapper;
+import mybatis_01.mybatis.com.ztx.mapper.UserMapper;
 import mybatis_01.mybatis.com.ztx.po.Orders;
 import mybatis_01.mybatis.com.ztx.po.OrdersCustom;
 import mybatis_01.mybatis.com.ztx.po.User;
@@ -99,4 +100,65 @@ public class OrderCustomTest {
 		}
 		sqlSession.close();
 	}
+	
+	// 一级缓存测试
+	@Test
+	public void testCache1() throws Exception{
+		SqlSession sqlSession = sqlSessionFactory.openSession();
+		
+		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+		
+		// 第一次进行查询
+		User user1 = userMapper.findUserById(1);
+		
+		System.out.println(user1);
+		
+		// 如果sqlSession去执行commit操作（执行插入、更新、删除），清空SqlSession中的一级缓存，这样做的目的为了让缓存中存储的是最新的信息，避免脏读。
+		
+		// user1.setUsername("测试用户1");
+		// // 更新用户的信息
+		// userMapper.updateUser(user1);
+		// sqlSession.commit();
+		
+		// 第二次进行查询
+		User user2 = userMapper.findUserById(1);
+		System.out.println(user2);
+		
+		sqlSession.close();
+	}
+	
+	// 一级缓存测试
+	@Test
+	public void testCache2() throws Exception{
+		SqlSession sqlSession1 = sqlSessionFactory.openSession();
+		SqlSession sqlSession2= sqlSessionFactory.openSession();
+		SqlSession sqlSession3 = sqlSessionFactory.openSession();
+		
+		UserMapper userMapper1 = sqlSession1.getMapper(UserMapper.class);
+		UserMapper userMapper2 = sqlSession2.getMapper(UserMapper.class);
+		UserMapper userMapper3 = sqlSession3.getMapper(UserMapper.class);
+		
+		
+		// 第一次进行查询
+		User user1 = userMapper1.findUserById(1);
+		
+		System.out.println(user1);
+		
+		sqlSession1.close();
+		
+		// 如果sqlSession去执行commit操作（执行插入、更新、删除），清空SqlSession中的一级缓存，这样做的目的为了让缓存中存储的是最新的信息，避免脏读。
+		
+		// user1.setUsername("测试用户1");
+		// // 更新用户的信息
+		// userMapper3.updateUser(user1);
+		// sqlSession.commit();
+		
+		// 第二次进行查询
+		User user2 = userMapper2.findUserById(1);
+		System.out.println(user2);
+		sqlSession2.close();
+	}
+		
+	
+
 }

@@ -7,8 +7,12 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
     <!-- 加载属性文件 -->
     <properties resource="db.properties"></properties>
 	<settings>
-			<setting name="lazyLoadingEnabled" value="true"/>
-			<setting name="aggressiveLazyLoading" value="false"/>
+	    <!-- 开启延迟加载（默认为false） -->
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<!-- 关闭积极加载（默认为true） -->		
+		<setting name="aggressiveLazyLoading" value="false"/>
+		<!-- 开启二级缓存（默认为false） -->
+		<setting name="cacheEnabled" value="true"/>
 	</settings>
 	
 	<!-- 和spring整合后 environments配置将废除-->
