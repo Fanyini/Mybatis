@@ -127,7 +127,7 @@ public class OrderCustomTest {
 		sqlSession.close();
 	}
 	
-	// 一级缓存测试
+	// 二级缓存测试
 	@Test
 	public void testCache2() throws Exception{
 		SqlSession sqlSession1 = sqlSessionFactory.openSession();
